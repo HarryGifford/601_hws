@@ -61,6 +61,5 @@ function opt = trainNN(X, y, opt)
     % >> addpath ./minFunc/
     % >> mexAll
     addpath(genpath('minFunc/'));
-    
-    opt.theta = minFunc(@(t) costNN(t, X, y, opt), theta, opt);
+    opt.theta = minFunc(@costNN, theta, opt, X, y, opt);
 end

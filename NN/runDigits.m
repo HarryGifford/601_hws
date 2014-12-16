@@ -5,11 +5,10 @@ function runDigits()
     data_path = '../data/mnist.mat';
     
     % don't change the parameters in this file.
-    % we get ~92% accuracy with these parameters.
+    % we get ~91.3% accuracy with these parameters.
     opt.hidden_sizes = [64];
-    opt.lambda = .1;
-    opt.MaxIter = 400; % max iterations for minimization function.
-    
+    opt.lambda = 1;
+    opt.MaxIter = 400;
     opt = runNN(data_path, opt); % train and test NN.
     
     % show the learned weights.
@@ -19,7 +18,11 @@ function runDigits()
     K = max(y_train);
     
     Ws = unflattenParameters(opt.theta, [visible_size; opt.hidden_sizes; K]);
-    showImages(Ws{1}', 28, 28);
+    
+    rs = Ws{1};
+    rs = bsxfun(@rdivide, rs, sqrt(sum(rs.^2)));
+    
+    showImages(rs', 28, 28);
     
     % show the misclassifications.
     misclassified = opt.test_preds(:) ~= y_test(:);

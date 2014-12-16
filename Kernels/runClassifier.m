@@ -1,4 +1,4 @@
-function runClassifier(dataset, opt)
+function opt = runClassifier(dataset, opt)
 %RUNCLASSIFIER Runs a simple SVM or MLR classifier.
 % dataset - either 'random' or './path/to/dataset/' containing
 %           entries X_train, X_test, y_train, (y_test - optional).
@@ -75,6 +75,8 @@ function runClassifier(dataset, opt)
     
     preds = predictClassifier(opt, X_test);
     fprintf('Test Accuracy = %.2f%%\n', 100*mean(preds(:) == y_test(:)));
+    
+    opt.test_preds = preds + ymin - 1;
     
     % write the data out to a file that can be read by Kaggle.
     %writeLabels('my_labels.csv', preds);

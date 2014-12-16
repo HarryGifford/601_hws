@@ -35,6 +35,10 @@ function showImages(X, xdim, ydim)
             grid(y_start:y_end, x_start:x_end,:) = X(idx, :, :, :);
         end
     end
-    imshow(grid, 'InitialMagnification', 100);drawnow;drawnow;
+    if isOctave()
+        imshow(grid);drawnow;drawnow;
+    else
+        imshow(grid, 'InitialMagnification', 100);drawnow;drawnow;
+    end
 end
 

@@ -52,9 +52,11 @@ function [y, dy] = softplus(x)
 end
 
 function [y, dy] = tnh(x)
+% See Efficient Backprop by Y LeCun for more info on where the magic
+% constants come from.
     y = tanh(2/3*x);
     if nargout >= 2
-        dy = 2/3*1.7159*(1 - y.^2);
+        dy = 2/3*1.7159*(1 - y.^2) + 0.01;
     end
-    y = 1.7159*y;
+    y = 1.7159*y + 0.01*x;
 end

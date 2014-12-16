@@ -24,7 +24,11 @@ function [cost, grad] = costNN(theta, X, y, opt)
     all_layer_sizes = [visible_size; opt.hidden_sizes; output_size];
     
     [Ws, bs] = unflattenParameters(theta, all_layer_sizes);
-
+    if isfield(opt, 'show_weights') && opt.show_weights
+        rs = Ws{1};
+        rs = bsxfun(@rdivide, rs, sqrt(sum(rs.^2)));
+        showImages(rs', 28, 28);
+    end
     % You may find the following variables helpful.
     
     Wgrads = cell(n_layers, 1); % Wgrads{i} = Wigrad
@@ -101,9 +105,13 @@ end
 
 % some other activation functions you might want to try.
 function [y, dy] = tnh(x)
+% See Efficient Backprop by Y LeCun for more info on where the magic
+% constants come from.
     y = tanh(2/3*x);
-    dy = 2/3*1.7159*(1 - y.^2);
-    y = 1.7159*y;
+    if nargout >= 2
+        dy = 2/3*1.7159*(1 - y.^2) + 0.01;
+    end
+    y = 1.7159*y + 0.01*x;
 end
 
 function [y, dy] = softplus(x)

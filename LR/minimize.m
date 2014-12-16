@@ -41,7 +41,7 @@ function theta = minimize(f, theta, X, y, opt)
         [cost, grad] = f(theta, X, y);
         theta = theta - alpha*grad;
         if abs(cost - prev_cost) < opt.tol, break; end
-        if mod(iter, 10) == 0,
+        if mod(iter, 1) == 0,
             fprintf('Running iteration %d/%d with cost = %.5f\n',...
                     iter, opt.MaxIter, cost);
         end
