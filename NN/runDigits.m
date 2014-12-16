@@ -7,7 +7,7 @@ function runDigits()
     % don't change the parameters in this file.
     % we get ~91.3% accuracy with these parameters.
     opt.hidden_sizes = [64];
-    opt.lambda = 1;
+    opt.lambda = 1e-2;
     opt.MaxIter = 400;
     opt = runNN(data_path, opt); % train and test NN.
     
