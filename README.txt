@@ -1,5 +1,8 @@
 10-601 Homework Repository.
 
+Directory structure
+===================
+
 Contains code for SVM, Logistic Regression and Neural Networks.
 
 AE - Autoencoder code. Somewhat messy and probably not useful for use in a homework.
