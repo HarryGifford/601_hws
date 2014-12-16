@@ -1,4 +1,4 @@
-# 10-601 Fall 2014 Assignment 3: Logistic Regression and Neural Networks #
+# 10-601 Fall 2014 Assignment 3: Neural Networks #
 
 Primary TAs for this assignment:
 
