@@ -4,12 +4,10 @@ function opt = trainNN(X, y, opt)
 %  y           - m x 1 labels (must be discrete).
 %                IMPORTANT: If there are k classes then the class labels
 %                should be in 1:k.
-%  hidden_size - number of hidden units in the neural network.
-%  output_size - number of units in output layer. Should be the number of
-%                classes.
 %
 %  opt - updated options struct containing learned parameters, theta.
 %     .theta - learned NN parameters.
+%     .hidden_sizes - numbers of hidden units in the neural network.
 %
 
     % The following line converts the m x 1 vector of labels into an 
