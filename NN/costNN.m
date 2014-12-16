@@ -60,7 +60,20 @@ function [cost, grad] = costNN(theta, X, y, opt)
     acts{1}.a = X;
     for i = 1:n_layers-1
         z = bsxfun(@plus, acts{i}.a*Ws{i}, bs{i});
-        [acts{i+1}.a, acts{i+1}.da] = sigmoid(z);
+        if strcmp(opt.activation, 'sigmoid')
+            [a, da] = sigmoid(z);
+        elseif strcmp(opt.activation, 'softplus')
+            [a, da] = softplus(z);
+        elseif strcmp(opt.activation, 'tanh')
+            a = tanh(2/3*z);
+            da = 2/3*1.7159*(1 - a.^2);
+            a = 1.7159*a;
+        elseif strcmp(opt.activation, 'relu')
+            a = max(0, z);
+            da = z >= 0;
+        end
+        acts{i+1}.a = a;
+        acts{i+1}.da = da;
     end
     
     % output layer cost
