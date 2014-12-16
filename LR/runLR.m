@@ -1,14 +1,20 @@
 function opt = runLR(dataset, opt)
 % fits a LR classifier on the given dataset.
 %
-% dataset - either 'random' or './path/to/dataset/' containing
+% dataset - either 'random' or './path/to/dataset.mat' containing
 %           entries X_train, X_test, y_train, (y_test - optional).
 % opt     - options to run with:
-%    .lambda - regularization strength.
+%    .lambda  - regularization strength.
+%    .display - if 2D dataset, then plot the decision boundary.
 %
 % opt     - updated options.
-%    .theta - learned parameters.
+%    .theta      - learned parameters.
 %    .test_preds - test set predictions.
+%
+% Example usage:
+%  runLR();
+%  runLR('random', struct('lambda', 10.3));
+%  runLR('../data/spiral.mat', struct('display', true));
 %
     if nargin < 1, dataset = 'random'; end
     if nargin < 2
@@ -70,8 +76,7 @@ function opt = runLR(dataset, opt)
     end
     
     hold on;
-    plotBoundary(@(x) predictLR(opt, x),...
-                 xmin, xmax, ymin, ymax);
+    plotBoundary(@(x) predictLR(opt, x), xmin, xmax, ymin, ymax);
     if K <= 6, cy = colors(y_train,:); else cy = y_train; end;
     scatter(X_train(:, 1), X_train(:, 2), [], cy, 'filled');
     axis equal tight

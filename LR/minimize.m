@@ -1,21 +1,35 @@
 function theta = minimize(f, theta, X, y, opt)
 % MINIMIZE  Find a local minima of a function f, starting at theta.
-%          f - function to be minimized. f should be of the form:
+%  f     - function to be minimized. f should be of the form:
 %              [cost, grad] = f(theta, X, y)
-
+%  theta - initial parameters.
+%  X     - m x n design matrix.
+%  y     - m x k target matrix.
+%  opt   - options
+%     .tol         - you should stop optimization when the absolute
+%                    difference in cost between two iterations is less
+%                    than tol.
+%     .MaxIter     - Alternatively, break after reaching this number of
+%                    iterations over the data.
+%     .alpha       - Gradient step size.
+%     .alpha_decay - Decay alpha by this constant after each pass over the
+%                    data.
+% 
+%  theta - optimized paramaters.
+% 
     if nargin < 5 % no options provided.
-        opt.tol = 1e-6; % you should stop optimization when the absolute
-                    % difference in cost between two iterations is less
-                    % than tol.  
-        opt.maxIter = 1000; % you should also break after maxIter if you
-                             % haven't reached tol yet.
-        opt.alpha = 2;
-        opt.gamma = 0.7;
-        opt.alpha_decay = 0.998;
-        opt.batch_size = 500;
+        opt = struct();
     end
+    % set defaults for options that are not provided.
+    if ~isfield(opt, 'tol'), opt.tol = 1e-6; end
+    if ~isfield(opt, 'MaxIter'), opt.MaxIter = 1000; end
+    if ~isfield(opt, 'alpha'), opt.alpha = 2; end
+    if ~isfield(opt, 'gamma'), opt.gamma = 0.7; end
+    if ~isfield(opt, 'alpha_decay'), opt.alpha_decay = 0.998; end
+    if ~isfield(opt, 'batch_size'), opt.batch_size = 500; end
     
     m = size(X, 1);
+    
     % Write your solution below. You should use gradient descent to find
     % a minimum of the function.
     % Our solution is ~10 lines
@@ -26,7 +40,7 @@ function theta = minimize(f, theta, X, y, opt)
     alpha = opt.alpha;
     v = zeros(size(theta));
     fprintf('Running Gradient Descent...\n');
-    for iter = 1:opt.maxIter
+    for iter = 1:opt.MaxIter
         idxs = randperm(m);
         X = X(idxs, :);
         y = y(idxs, :);
@@ -45,9 +59,9 @@ function theta = minimize(f, theta, X, y, opt)
         end
         cost = f(theta, X, y);
         if abs(cost - prev_cost) < opt.tol, break; end
-        if mod(iter, 1) == 0,
+        if mod(iter, 10) == 0,
             fprintf('Running epoch %d/%d with cost = %.5f\n',...
-                    iter, opt.maxIter, cost);
+                    iter, opt.MaxIter, cost);
         end
         prev_cost = cost;
     end 

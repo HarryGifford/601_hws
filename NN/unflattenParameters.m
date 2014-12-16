@@ -1,26 +1,15 @@
-%function [W1, W2, b1, b2] = unflattenParameters(theta, output_size, ...
-%                                                hidden_size, visible_size)
-%UNFLATTENPARAMETERS  convert theta vector into different NN parameters.
-%  Takes the really long theta parameter vector used for optimization and 
-%  converts it into the weight and bias matrices.
-%
-%  theta - vector of all NN parameters
-%
-%  W1 - Weights of connections between neurons in the input and hidden
-%       layers.
-%  W2 - Same as above for hidden and output layers.
-%  b1 - biases for the hidden layer.
-%  b2 - biases for the output layer.
-%
-%
-%    [Ws, bs] = unflattenParameters_(theta, [visible_size; hidden_size; output_size]);
-%    W1 = Ws{1};
-%    W2 = Ws{2};
-%    b1 = bs{1};
-%    b2 = bs{2};
-%end
-
 function [Ws, bs] = unflattenParameters(theta, layer_sizes)
+%function [Ws, bs] = unflattenParameters(theta, layer_sizes)
+%  Takes a 1d vector of NN parameters and turns it into a vector of weights
+%  and biases.
+%
+%  theta       - q x 1 vector of parameters.
+%  layer_sizes - (L+1) x 1 vector in the form [input_size; hidden_sizes;
+%                                              output_size]
+%
+%  Ws - Ws{i} is an insize x outsize parameter matrix of weights.
+%  bs - bs{i} is an insize x 1 parameter vector of bias units.
+%
     n_layers = length(layer_sizes);
     Ws = cell(n_layers-1, 1);
     bs = cell(n_layers-1, 1);

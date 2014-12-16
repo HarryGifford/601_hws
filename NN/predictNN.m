@@ -1,5 +1,5 @@
-function preds = predictNNClassification(opt, X)
-%NNPREDICTCLASSIFICATION Predict the classes of each x_i
+function preds = predictNN(opt, X)
+%PREDICTNN Predict the classes of each x_i
 %  opt - options
 %     .theta        - neural network parameter vector.
 %     .hidden_sizes - number of hidden units in hidden layer.

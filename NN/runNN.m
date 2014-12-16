@@ -14,9 +14,6 @@ function opt = runNN(dataset, opt)
 %
     if nargin < 1, dataset = 'random'; end
     if nargin < 2
-        opt.lambda = 0.01;
-        opt.hidden_sizes = 20;
-        opt.display = true;
         opt.MaxIter = 400;
     end
     if ~isfield(opt, 'lambda'), opt.lambda = 0.01; end
@@ -49,11 +46,11 @@ function opt = runNN(dataset, opt)
     end
     
     % train and test classifier
-    opt = trainNNClassification(X_train(1:end,:), y_train(1:end), opt);
-    preds = predictNNClassification(opt, X_train);
+    opt = trainNN(X_train(1:end,:), y_train(1:end), opt);
+    preds = predictNN(opt, X_train);
     fprintf('Train Accuracy = %.2f%%\n', 100*mean(preds(:) == y_train(:)));
     
-    preds = predictNNClassification(opt, X_test);
+    preds = predictNN(opt, X_test);
     fprintf('Test Accuracy = %.2f%%\n', 100*mean(preds(:) == y_test(:)));    
     
     opt.test_preds = preds + ymin - 1;
@@ -75,7 +72,7 @@ function opt = runNN(dataset, opt)
 
     
     hold on;
-    plotBoundary(@(x) predictNNClassification(opt, x),...
+    plotBoundary(@(x) predictNN(opt, x),...
                  xmin, xmax, ymin, ymax);
     if K <= 6, cy = colors(y_train,:); else cy = y_train; end;
     scatter(X_train(:, 1), X_train(:, 2), [], cy, 'filled');

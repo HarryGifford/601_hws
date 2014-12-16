@@ -20,4 +20,3 @@ function preds = predictLR(opt, X)
     preds = preds + opt.ymin - 1;
     
 end
-
