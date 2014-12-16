@@ -3,20 +3,22 @@
 
 Please use Piazza if you have any questions.
 
-costL2 - L2 Regularization cost function. Used to add regularization to a cost function.
+== Directory structure:
 
-costLR - Logistic Regression cost function.
+costL2.m - L2 Regularization cost function. Used to add regularization to a cost function.
 
-costSE - Squared error cost function.
+costLR.m - Logistic Regression cost function.
 
-costSVM - SVM cost function.
+costSE.m - Squared error cost function.
 
-minimize - function applies gradient descent to the given cost function.
+costSVM.m - SVM cost function.
 
-predictLR - predicts class labels for data given a trained model.
+minimize.m - function applies gradient descent to the given cost function.
 
-runDigits - script that trains and tests your logistic regression classifier against a subset of the MNIST dataset.
+predictLR.m - predicts class labels for data given a trained model.
 
-runLR - script that trains and tests your logistic regression classifier against some dataset. If no dataset is given it runs against a randomly generated 2D dataset and plots the decision boundary.
+runDigits.m - script that trains and tests your logistic regression classifier against a subset of the MNIST dataset.
 
-trainLR - trains the Logistic Regression classifier.
+runLR.m - script that trains and tests your logistic regression classifier against some dataset. If no dataset is given it runs against a randomly generated 2D dataset and plots the decision boundary.
+
+trainLR.m - trains the Logistic Regression classifier.
