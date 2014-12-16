@@ -1,4 +1,9 @@
-10-601 Homework Repository.
+==========================
+10-601 Homework Repository
+==========================
+
+Directory structure
+===================
 
 Contains code for SVM, Logistic Regression and Neural Networks.
 
