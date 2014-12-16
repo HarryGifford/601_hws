@@ -1,16 +1,12 @@
-==========================
-10-601 Homework Repository
-==========================
+# 10-601 Homework Repository #
 
-Directory structure
-===================
+Contains code for SVM, Logistic Regression and Neural Networks. Written for the Fall 2014 instance of 10-601 Machine Learning at CMU.
 
-Contains code for SVM, Logistic Regression and Neural Networks.
-
-AE - Autoencoder code. Somewhat messy and probably not useful for use in a homework.
+## Directory structure
 
 Folder  | Description
 ------  | -----------
+AE      | Autoencoder code. Somewhat messy and probably not useful for use in a homework.
 Kernels | Contains code to run Kernelized versions of LR or SVM. Both are trained using gradient methods (either SGD or L-BFGS).
 LR      | Logistic Regression code. Can be used to train and test a LR classifier (or SVM).
 NN      | Neural Network code.
