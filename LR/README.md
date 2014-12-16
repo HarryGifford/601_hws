@@ -1,9 +1,12 @@
-10-601 Logistic Regression code.
+===============================
+10-601 Logistic Regression code
+===============================
 - Harry Gifford (hgifford@cmu.edu)
 
 Please use Piazza if you have any questions.
 
-== Directory structure:
+Directory structure
+===================
 
 costL2.m - L2 Regularization cost function. Used to add regularization to a cost function.
 
