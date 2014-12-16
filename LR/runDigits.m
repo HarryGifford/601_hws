@@ -7,7 +7,7 @@ function runDigits()
     % don't change the parameters in this file.
     % we get ~88% accuracy with these parameters.
     opt.lambda = 10.0;
-    opt.MaxIter = 400; % max iterations for minimization function.
+    opt.MaxIter = 1000; % max iterations for minimization function.
     
     opt = runLR(data_path, opt);
     
