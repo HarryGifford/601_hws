@@ -11,17 +11,17 @@ Please see handout and individual files for more details.
 
 ## Directory structure
 
-(*) indicates you should modify this file.
-(-) indicates you may need to modify this file.
+**This** indicates you should modify this file.
+_This_ indicates you may need to modify this file.
 
-Folder                    | Description
-------                    | -----------
-(*)./costNN.m             | Neural network (NN) cost function.
-(*)./computeActivations.m | Compute the activations of the neural network on the output layer.
-(*)./predictNN.m          | Use your trained model to return a vector of predicted labels for the given data.
-(-)./trainNN.m            | Runs the NN training algorithm. You shouldn't need to touch this, unless you are having issues with minFunc. You should still read this function and understand what it is doing though.
-./runNN.m                 | Tests your NN on some dataset. You should have first implemented costNN.m, computeActivations.m and predictNN.m
-./runDigits.m             | Tests your NN on MNIST. You should be able to run runNN.m before running this.
+Folder                     | Description
+------                     | -----------
+**./costNN.m**             | Neural network (NN) cost function.
+**./computeActivations.m** | Compute the activations of the neural network on the output layer.
+**./predictNN.m**          | Use your trained model to return a vector of predicted labels for the given data.
+_./trainNN.m_              | Runs the NN training algorithm. You shouldn't need to touch this, unless you are having issues with minFunc. You should still read this function and understand what it is doing though.
+./runNN.m                  | Tests your NN on some dataset. You should have first implemented costNN.m, computeActivations.m and predictNN.m
+./runDigits.m              | Tests your NN on MNIST. You should be able to run runNN.m before running this.
 
 ## Sources:
 
