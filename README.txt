@@ -1,4 +1,6 @@
-10-601 Homework Repository.
+==========================
+10-601 Homework Repository
+==========================
 
 Directory structure
 ===================
