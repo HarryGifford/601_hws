@@ -33,15 +33,7 @@ function act = computeActivations(theta, X, output_size, opt)
     act = X;
     for i = 1:length(layer_sizes)-1
         z = bsxfun(@plus, act*Ws{i}, bs{i});
-        if strcmp(opt.activation, 'sigmoid')
-            act = sigmoid(z);
-        elseif strcmp(opt.activation, 'softplus')
-            act = softplus(z);
-        elseif strcmp(opt.activation, 'tanh')
-            act = 1.7159*tanh(z);
-        elseif strcmp(opt.activation, 'relu')
-            act = max(0, z);
-        end
+        act = sigmoid(z);
     end
     %% END SOLUTION
 end
@@ -54,7 +46,15 @@ function [y, dy] = sigmoid(x)
 end
 
 function [y, dy] = softplus(x)
-    y = log1p(exp(x));
+    y = log1p(exp(x)) + 0.01*x;
     if nargout < 2, return; end
-    dy = sigmoid(x);
+    dy = sigmoid(x) + 0.01;
+end
+
+function [y, dy] = tnh(x)
+    y = tanh(2/3*x);
+    if nargout >= 2
+        dy = 2/3*1.7159*(1 - y.^2);
+    end
+    y = 1.7159*y;
 end

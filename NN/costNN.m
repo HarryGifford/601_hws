@@ -3,9 +3,9 @@ function [cost, grad] = costNN(theta, X, y, opt)
 %
 % function [cost, grad] = costNN(X, y, theta, opt)
 %
+%   theta - flattened parameters for NN.
 %   X     - m x n design matrix of m data points.
 %   y     - m x k labels.
-%   theta - flattened parameters for NN.
 %   opt   - Struct must contain:
 %          lambda        - regularization strength
 %          hidden_sizes  - vector of number of units in each hidden layer. 
@@ -24,9 +24,7 @@ function [cost, grad] = costNN(theta, X, y, opt)
     all_layer_sizes = [visible_size; opt.hidden_sizes; output_size];
     
     [Ws, bs] = unflattenParameters(theta, all_layer_sizes);
-    if visible_size == 28*28
-        showImages(Ws{1}', 28, 28);
-    end
+
     % You may find the following variables helpful.
     
     Wgrads = cell(n_layers, 1); % Wgrads{i} = Wigrad
@@ -38,8 +36,9 @@ function [cost, grad] = costNN(theta, X, y, opt)
     %      layer 3 = output layer
     
     %% Write your code below to compute the cost and gradients.
-    % our solution is ~20 lines. You may assume that the NN has a single
-    % hidden layer.
+    % Our solution is ~20 lines. We will only grade your code on NNs with a
+    % single hidden layer, so you may assume that all input networks have a
+    % single hidden layer.
 
     %% delete the following placeholder code when you start programming.
     % These three lines are here to prevent costNN crashing if you've not
@@ -57,20 +56,7 @@ function [cost, grad] = costNN(theta, X, y, opt)
     acts{1}.a = X;
     for i = 1:n_layers-1
         z = bsxfun(@plus, acts{i}.a*Ws{i}, bs{i});
-        if strcmp(opt.activation, 'sigmoid')
-            [a, da] = sigmoid(z);
-        elseif strcmp(opt.activation, 'softplus')
-            [a, da] = softplus(z);
-        elseif strcmp(opt.activation, 'tanh')
-            a = tanh(2/3*z);
-            da = 2/3*1.7159*(1 - a.^2);
-            a = 1.7159*a;
-        elseif strcmp(opt.activation, 'relu')
-            a = max(0, z);
-            da = z >= 0;
-        end
-        acts{i+1}.a = a;
-        acts{i+1}.da = da;
+        [acts{i+1}.a, acts{i+1}.da] = sigmoid(z);
     end
     
     % output layer cost
@@ -102,6 +88,7 @@ function [cost, grad] = costNN(theta, X, y, opt)
         assert(all(size(bs{i}) == size(bgrads{i})));        
     end
     
+    % reshape the parameters for minFunc.
     grad = flattenParameters(Wgrads, bgrads);
 
 end
@@ -112,7 +99,15 @@ function [y, dy] = sigmoid(x)
     dy = y.*(1-y);
 end
 
+% some other activation functions you might want to try.
+function [y, dy] = tnh(x)
+    y = tanh(2/3*x);
+    dy = 2/3*1.7159*(1 - y.^2);
+    y = 1.7159*y;
+end
+
 function [y, dy] = softplus(x)
-    y = log1p(exp(x));
-    dy = sigmoid(x);
+    y = log1p(exp(x)) + 0.01*x;
+    if nargout < 2, return; end    
+    dy = sigmoid(x) + 0.01;
 end
