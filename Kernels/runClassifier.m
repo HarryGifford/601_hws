@@ -52,6 +52,7 @@ function opt = runClassifier(dataset, opt)
         [X_train, y_train] = generateData(m, centers);
         [X_test, y_test] = generateData(2*m, centers);
         opt.display = true;    % plot decision boundary.
+        ymin = min(y_train(:));
     else % load the given dataset.
         load(dataset);
         
@@ -67,7 +68,7 @@ function opt = runClassifier(dataset, opt)
         end
         K = max(y_train(:));
     end
-        
+    
     % train and test classifier
     opt = trainClassifier(X_train(1:end,:), y_train(1:end), opt);
     preds = predictClassifier(opt, X_train);

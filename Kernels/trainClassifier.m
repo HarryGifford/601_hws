@@ -29,7 +29,7 @@ function opt = trainClassifier(X, y, opt)
 %     .theta - (m+1)*K x 1 parameter vector
 %
 
-    if nargin < 3, opt.dual = false; end
+    if nargin < 3, opt = struct(); end
     opt = handleOptions(opt);
     
     m = size(X, 1);
@@ -42,11 +42,11 @@ function opt = trainClassifier(X, y, opt)
         X = [ones(m, 1), X];
     end
     
-    theta = zeros(size(X, 2), K); % initialize the parameters to zero.
+    opt.theta = zeros(size(X, 2), K); % initialize the parameters to zero.
 
     y = full(sparse(1:m, y, 1)); % create an indicator matrix of labels.
         
-    opt.theta = minFunc(@l2regu, theta(:), opt, X, y, opt);
+    opt.theta = minFunc(@l2regu, opt.theta(:), opt, X, y, opt);
     opt.theta = reshape(opt.theta, size(X, 2), []);
 end
 
