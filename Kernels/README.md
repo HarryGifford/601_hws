@@ -20,3 +20,17 @@ Folder                | Description
 ./predictClassifier.m | Runs the trained classifier on a particular dataset and returns the predicted labels.
 ./rbfKernel.m         | RBF kernel.
 ./runClassifier.m     | Trains and evaluates a the tinyclassifier. You can call it in several ways. 1) runClassifier() will generate some sample data and plot the decision boundary. 2) runClassifier('random') will do the same as above. 3) runClassifier('./path/to/data.mat') will run the classifier on the training and test data in data.mat. data.mat should have X_train, X_test, y_train and optionally, y_test. 4) runClassifier(..., opt) will run in the same way as the above, but you can pass in different parameters through the opt struct. Type 'help runClassifier' for a list of what you can change in 'opt'. You can also manually modify options inside runClassifier.m.
+
+## Examples:
+
+```matlab
+# Train a linear Multinomial Logistic Regression on some random data and display decision boundary.
+runClassifier();
+# Train a Polynomial kernel against the Bullseye dataset and display decision boundary.
+runClassifier('../data/bullseye.mat', struct('dual', true, 'kernelfn', 'poly', 'order', 2));
+# Train a Kernel L2-SVM with an RBF kernel against the Bullseye dataset and display decision boundary.
+runClassifier('../data/spiral.mat', struct('dual', true, 'kernelfn', 'rbf', 'gamma', 1000, 'lambda', 0.1, 'loss', 'l2svm'));
+
+# Train and test an RBF SVM on the MNIST data.
+runDigits();
+```
